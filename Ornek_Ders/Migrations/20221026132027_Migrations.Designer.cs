@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Ornek_Ders.Data;
 
@@ -10,9 +11,10 @@ using Ornek_Ders.Data;
 namespace Ornek_Ders.Migrations
 {
     [DbContext(typeof(ContacDbApiContext))]
-    partial class ContacDbApiContextModelSnapshot : ModelSnapshot
+    [Migration("20221026132027_Migrations")]
+    partial class Migrations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

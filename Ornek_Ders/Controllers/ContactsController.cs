@@ -30,7 +30,7 @@ namespace Ornek_Ders.Controllers
             var contact = new Contact()
             {
                 Id = new int(),
-                Address = addContactRequest.Address,
+                Password = addContactRequest.Password,
                 Email = addContactRequest.Email,
                 FullName = addContactRequest.FullName,
                 Phone = addContactRequest.Phone
@@ -60,7 +60,7 @@ namespace Ornek_Ders.Controllers
             {
                 contact.FullName = updateContactRequest.FullName;
                 contact.Email = updateContactRequest.Email;
-                contact.Address = updateContactRequest.Address;
+                contact.Password = updateContactRequest.Password;
                 contact.Phone = updateContactRequest.Phone;
 
                 await dbContext.SaveChangesAsync();
