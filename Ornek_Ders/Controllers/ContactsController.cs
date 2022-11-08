@@ -5,6 +5,7 @@ using Ornek_Ders.Controllers.Models;
 using Ornek_Ders.Data;
 using Ornek_Ders.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 
 namespace Ornek_Ders.Controllers
 {
@@ -19,21 +20,25 @@ namespace Ornek_Ders.Controllers
 
         }
         [HttpGet]
+        [Route("get")]
         public IActionResult GetContacs()
         {
+            
             return Ok(dbContext.Contacts.ToList());
 
         }
         [HttpPost]
-        public async Task<IActionResult> AddContact(AddContactRequest addContactRequest)
+        [Route("register")]
+        public async Task<IActionResult> AddContact(AddContactRequest value)
         {
             var contact = new Contact()
             {
                 Id = new int(),
-                Password = addContactRequest.Password,
-                Email = addContactRequest.Email,
-                FullName = addContactRequest.FullName,
-                Phone = addContactRequest.Phone
+                Username = value.Username,
+                Password = value.Password,
+
+
+
             };
             await dbContext.Contacts.AddAsync(contact);
             await dbContext.SaveChangesAsync();
@@ -58,10 +63,10 @@ namespace Ornek_Ders.Controllers
             var contact = await dbContext.Contacts.FindAsync(id);
             if (contact !=null)
             {
-                contact.FullName = updateContactRequest.FullName;
-                contact.Email = updateContactRequest.Email;
+                contact.Username = updateContactRequest.Username;
+                
                 contact.Password = updateContactRequest.Password;
-                contact.Phone = updateContactRequest.Phone;
+               
 
                 await dbContext.SaveChangesAsync();
                 return Ok(contact);

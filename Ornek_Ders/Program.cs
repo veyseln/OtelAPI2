@@ -10,9 +10,18 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //builder.Services.AddDbContext<ContacDbApiContext>(options => options.UseInMemoryDatabase("ContacsDb"));
 builder.Services.AddDbContext<ContacDbApiContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ContactsApiConnectionStrings")));
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        name: "AllowOrigin",
+        builder => {
+            builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+        });
+});
 var app = builder.Build();
-
+app.UseCors("AllowOrigin");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
