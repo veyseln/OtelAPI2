@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Ornek_Ders.Data;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //builder.Services.AddDbContext<ContacDbApiContext>(options => options.UseInMemoryDatabase("ContacsDb"));
 builder.Services.AddDbContext<ContacDbApiContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ContactsApiConnectionStrings")));
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(

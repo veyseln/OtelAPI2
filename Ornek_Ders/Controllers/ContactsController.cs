@@ -12,8 +12,8 @@ namespace Ornek_Ders.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class ContactsController : Controller
-    {
-        private readonly ContacDbApiContext dbContext;
+    {private readonly ContacDbApiContext dbContext;
+        
         public ContactsController(ContacDbApiContext dbContext)
         {
             this.dbContext = dbContext;

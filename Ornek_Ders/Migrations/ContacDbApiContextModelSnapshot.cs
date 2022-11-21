@@ -7,7 +7,7 @@ using Ornek_Ders.Data;
 
 #nullable disable
 
-namespace Ornek_Ders.Migrations
+namespace OrnekDers.Migrations
 {
     [DbContext(typeof(ContacDbApiContext))]
     partial class ContacDbApiContextModelSnapshot : ModelSnapshot
@@ -16,10 +16,10 @@ namespace Ornek_Ders.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("ProductVersion", "7.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Ornek_Ders.Controllers.Models.Contact", b =>
                 {
@@ -27,7 +27,7 @@ namespace Ornek_Ders.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -40,6 +40,27 @@ namespace Ornek_Ders.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Contacts");
+                });
+
+            modelBuilder.Entity("Ornek_Ders.Models.Hotel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("HotelCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HotelName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Hotels");
                 });
 #pragma warning restore 612, 618
         }
