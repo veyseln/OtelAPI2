@@ -45,5 +45,38 @@ namespace Ornek_Ders.Controllers
             await contacDbApiContext.SaveChangesAsync();
             return Ok(hotel);
         }
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> DeleteHotel([FromRoute] int id)
+        {
+            var hotel = await contacDbApiContext.Hotels.FindAsync(id);
+            if (hotel != null)
+            {
+                contacDbApiContext.Remove(hotel);
+                await contacDbApiContext.SaveChangesAsync();
+                return Ok();
+            }
+            return NotFound();
+        }
+            [HttpPut]
+            [Route("{id:int}")]
+            public async Task<IActionResult> UpdateHotel([FromRoute] int id, UpdateHotelRequest updateHotelRequest)
+
+            {
+                var hotel = await contacDbApiContext.Hotels.FindAsync(id);
+                if (hotel != null)
+                {
+                    hotel.HotelCode= updateHotelRequest.HotelCode;
+
+                    hotel.HotelName = updateHotelRequest.HotelName;
+
+
+                    await contacDbApiContext.SaveChangesAsync();
+                    return Ok(hotel);
+
+                }
+                return NotFound();
+            }
+        }
     }
-}
+
