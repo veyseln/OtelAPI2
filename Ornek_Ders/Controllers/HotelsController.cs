@@ -46,7 +46,7 @@ namespace Ornek_Ders.Controllers
             return Ok(hotel);
         }
         [HttpDelete]
-        [Route("{id:int}")]
+        [Route("Delete/{id:int}")]
         public async Task<IActionResult> DeleteHotel([FromRoute] int id)
         {
             var hotel = await contacDbApiContext.Hotels.FindAsync(id);
@@ -59,23 +59,23 @@ namespace Ornek_Ders.Controllers
             return NotFound();
         }
             [HttpPut]
-            [Route("{id:int}")]
-            public async Task<IActionResult> UpdateHotel([FromRoute] int id, UpdateHotelRequest updateHotelRequest)
+            [Route("Update/{id:int}")]
+            public async Task<IActionResult> UpdateHotel([FromBody] Hotel model)
 
             {
-                var hotel = await contacDbApiContext.Hotels.FindAsync(id);
-                if (hotel != null)
+            Hotel hotel = await contacDbApiContext.Hotels.FirstOrDefaultAsync(h => h.Id == model.Id);
+            if (hotel != null)
                 {
-                    hotel.HotelCode= updateHotelRequest.HotelCode;
+                    hotel.HotelCode= model.HotelCode;
 
-                    hotel.HotelName = updateHotelRequest.HotelName;
+                    hotel.HotelName = model.HotelName;
 
 
                     await contacDbApiContext.SaveChangesAsync();
                     return Ok(hotel);
 
                 }
-                return NotFound();
+            return NotFound();
             }
         }
     }
