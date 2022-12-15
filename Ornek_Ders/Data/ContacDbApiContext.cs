@@ -12,5 +12,6 @@ namespace Ornek_Ders.Data
         }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
+        public DbSet<Roomtype> RoomTypes { get; set; }
     }
 }
